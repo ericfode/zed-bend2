@@ -28,3 +28,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## Official Bend2 compiler and formatter
+
+`server/vendor/bend.ts`, `base.bend`, and `formatter.ts` originate from
+[bendlang/bend](https://github.com/bendlang/bend) at the revision recorded in
+`server/vendor/provenance.json`. Copyright 2026 HigherOrderCO.
+
+They are licensed under **Apache-2.0**; the complete license is retained in
+`server/vendor/LICENSE`. The compiler has local editor metadata and loader
+extensions, marked in its header. Its pattern lowering, normalizer, inference,
+and checker are unchanged. The formatter and Base are unmodified.
+
+## Bundled language-server dependencies
+
+The server bundles Microsoft's MIT-licensed `vscode-jsonrpc`,
+`vscode-languageserver`, `vscode-languageserver-protocol`,
+`vscode-languageserver-textdocument`, and `vscode-languageserver-types`.
+Complete dependency licenses, including the compiler's Apache-2.0 license,
+are generated into `server/dist/THIRD_PARTY_LICENSES.txt` and installed alongside
+the language server by the Zed adapter.
+
+The Rust adapter uses `zed_extension_api` under Apache-2.0 and its transitive
+dependencies under their respective licenses; versions are pinned in
+`Cargo.lock`.

@@ -1,10 +1,15 @@
 id = "bend2"
 name = "Bend2"
-version = "0.1.0"
+version = "0.2.0"
 schema_version = 1
 authors = ["Eric Fode"]
-description = "Bend2 syntax highlighting, bracket matching, indentation, and outline"
+description = "Bend2 language support"
 repository = "https://github.com/ericfode/zed-bend2"
+
+[language_servers.bend2]
+name = "Bend2 language server"
+languages = ["Bend2"]
+language_ids = { Bend2 = "bend2" }
 
 [grammars.bend]
 repository = "https://github.com/amaanq/tree-sitter-bend"

@@ -1,15 +1,26 @@
 {
   "name": "bend2-zed",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Bend2 syntax highlighting for Zed",
+  "description": "Bend2 language support for Zed",
   "engines": {
     "node": ">=22"
   },
   "scripts": {
-    "test": "node scripts/test.mjs"
+    "build:server": "node scripts/build-server.mjs",
+    "typecheck": "tsc -p server/tsconfig.json",
+    "test": "npm run test:syntax && npm run test:server",
+    "test:syntax": "node scripts/test.mjs",
+    "test:server": "npm run build:server && node --test test/server/*.test.mjs"
+  },
+  "dependencies": {
+    "vscode-languageserver": "9.0.1",
+    "vscode-languageserver-textdocument": "1.0.12"
   },
   "devDependencies": {
+    "@types/node": "22.10.2",
+    "esbuild": "0.25.10",
+    "typescript": "5.9.3",
     "tree-sitter-cli": "0.25.10"
   }
 }

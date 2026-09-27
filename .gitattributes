@@ -1,0 +1,3 @@
+# Preserve upstream bytes and generated string literals, including whitespace.
+server/dist/* linguist-generated=true -whitespace
+server/vendor/* linguist-vendored=true -whitespace

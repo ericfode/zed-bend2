@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/bendlang/bend",
+  "revision": "574b6d39a235b539eb19a5c532993a0abb3d11ad",
+  "files": {
+    "bend.ts": "bend2/bend.ts",
+    "base.bend": "bend2/base.bend",
+    "formatter.ts": "tools/bend-fmt-lsp/src/formatter.ts",
+    "LICENSE": "LICENSE"
+  },
+  "hashes": {
+    "bend.ts": "09d2cc5c5d757f1a694dd126ccbac72ef2374cfe948d9d51c2b08247c5d2581e",
+    "base.bend": "22eea83911e2395f63594fea7c10ac0c1e5b548251681fc97cd7667e0eb7031b",
+    "formatter.ts": "8bfa354c0b3b589d250e3bf6f6e796a25991e3d6af20276fcb33a081a8baca2d",
+    "LICENSE": "0beb288abd3d067e231f3fbe7df1f8ee37344061fc67f22018150a19e4b26c35"
+  },
+  "trustedKernelSha256": "d8a6c8a1ba15013b8c0f6dd32330ec7162027940fb0177c82a96dcf0b6f2e3bc"
+}
