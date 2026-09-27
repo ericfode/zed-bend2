@@ -1,0 +1,6 @@
+node_modules/
+.build/
+# Zed builds these when installing a dev extension.
+grammars/
+extension.wasm
+.DS_Store

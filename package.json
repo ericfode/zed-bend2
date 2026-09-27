@@ -1,0 +1,15 @@
+{
+  "name": "bend2-zed",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bend2 syntax highlighting for Zed",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node scripts/test.mjs"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "0.25.10"
+  }
+}
