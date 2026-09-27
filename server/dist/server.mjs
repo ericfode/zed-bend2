@@ -1482,7 +1482,7 @@ emantic index"}`)}}finally{i.stop()}}se.onInitialize(e=>(Rf=e.capabilities.works
 e.rootPath??void 0]).filter(t=>!!t),{capabilities:{textDocumentSync:{openClose:!0,change:B.TextDocumentSyncKind.Full,save:{
 includeText:!1}},definitionProvider:!0,hoverProvider:!0,completionProvider:{triggerCharacters:["."]},documentSymbolProvider:!0,
 workspaceSymbolProvider:!0,referencesProvider:!0,renameProvider:{prepareProvider:!0},documentHighlightProvider:!0,documentFormattingProvider:!0,
-workspace:{workspaceFolders:{supported:!0,changeNotifications:!0}}},serverInfo:{name:"Bend2",version:"0.2.0"}}));se.onInitialized(
+workspace:{workspaceFolders:{supported:!0,changeNotifications:!0}}},serverInfo:{name:"Bend2",version:"0.2.1"}}));se.onInitialized(
 ()=>{Rf&&se.client.register(B.DidChangeWatchedFilesNotification.type,{watchers:[{globPattern:"**/*.bend"}]}).catch(e=>se.
 console.warn(`Could not register file watching: ${String(e)}`)),kf&&se.workspace.onDidChangeWorkspaceFolders(e=>{let t=new Set(
 e.removed.map(n=>at(n.uri)));Dt=[...new Set([...Dt.filter(n=>!t.has(n)),...e.added.flatMap(n=>{let r=at(n.uri);return r?

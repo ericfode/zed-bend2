@@ -14,7 +14,7 @@ async function start(t, files) {
   await mkdir(fixtures, { recursive: true });
   const root = await mkdtemp(path.join(fixtures, 'project-'));
   for (const [name, text] of Object.entries(files)) await writeFile(path.join(root, name), text);
-  const child = spawn(process.execPath, ['.build/lsp/server.mjs', '--stdio'], {
+  const child = spawn(process.execPath, ['.build/lsp/launcher.mjs', '--stdio'], {
     stdio: ['pipe', 'pipe', 'pipe'],
   });
   let stderr = '';

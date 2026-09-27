@@ -307,7 +307,7 @@ connection.onInitialize(params => {
     documentSymbolProvider: true, workspaceSymbolProvider: true, referencesProvider: true,
     renameProvider: { prepareProvider: true }, documentHighlightProvider: true, documentFormattingProvider: true,
     workspace: { workspaceFolders: { supported: true, changeNotifications: true } },
-  }, serverInfo: { name: 'Bend2', version: '0.2.0' } };
+  }, serverInfo: { name: 'Bend2', version: '0.2.1' } };
 });
 connection.onInitialized(() => {
   if (canWatch) void connection.client.register(DidChangeWatchedFilesNotification.type, {

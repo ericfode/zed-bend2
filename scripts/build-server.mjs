@@ -39,6 +39,7 @@ for (const entry of ['server', 'analysis-worker', 'analyzer']) {
   }
 }
 await cp(path.join(root, 'server/vendor/base.bend'), path.join(output, 'base.bend'));
+await cp(path.join(root, 'server/src/launcher.mjs'), path.join(output, 'launcher.mjs'));
 const packages = [
   'vscode-jsonrpc',
   'vscode-languageserver',
@@ -53,7 +54,7 @@ for (const name of packages) {
     + await readFile(path.join(root, 'node_modules', name, 'License.txt'), 'utf8');
 }
 await writeFile(path.join(output, 'THIRD_PARTY_LICENSES.txt'), notices);
-for (const name of ['server.mjs', 'analysis-worker.mjs', 'THIRD_PARTY_LICENSES.txt']) {
+for (const name of ['launcher.mjs', 'server.mjs', 'analysis-worker.mjs', 'THIRD_PARTY_LICENSES.txt']) {
   const generated = await readFile(path.join(output, name));
   const destination = path.join(distribution, name);
   if (check) {

@@ -14,6 +14,8 @@ that every future Bend2 release is compatible.
   protocol in `src/model.ts`, and runs the official checker for diagnostics.
 - `src/analysis-worker.ts`: isolates compilation from the LSP event loop.
 - `src/server.ts`: implements the LSP features against the semantic index.
+- `src/launcher.mjs`: checks the runtime before importing the server. Zed launches
+  it as the LSP command; no extension-side process execution capability is needed.
 - `vendor/formatter.ts`: the official Bend2 formatter, unmodified.
 - `../src/lib.rs`: Zed's launcher. It writes the bundled server into the
   extension's own working directory and runs it with Zed's Node.js runtime.

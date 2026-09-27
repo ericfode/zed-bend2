@@ -5,6 +5,10 @@ use zed_extension_api::{self as zed, Result};
 const ASSETS: &[(&str, &[u8])] = &[
     ("server.mjs", include_bytes!("../server/dist/server.mjs")),
     (
+        "launcher.mjs",
+        include_bytes!("../server/dist/launcher.mjs"),
+    ),
+    (
         "analysis-worker.mjs",
         include_bytes!("../server/dist/analysis-worker.mjs"),
     ),
@@ -40,19 +44,8 @@ impl zed::Extension for Bend2 {
         }
 
         let node = zed::node_binary_path()?;
-        let output = zed::process::Command::new(&node)
-            .arg("--version")
-            .output()
-            .map_err(|error| {
-                format!("Could not check Bend2's Node.js runtime at {node}: {error}")
-            })?;
-        if output.status != Some(0) {
-            return Err(format!(
-                "Could not check Bend2's Node.js runtime at {node}: {}",
-                String::from_utf8_lossy(&output.stderr).trim()
-            ));
-        }
-        require_node_22(&String::from_utf8_lossy(&output.stdout))?;
+        // The launcher checks Node's version inside the LSP process. A separate
+        // zed::process invocation would require an unnecessary process:exec grant.
 
         // Zed runs extensions in their writable work directory. Absolute paths
         // keep the server independent of the language server's working directory.
@@ -63,7 +56,10 @@ impl zed::Extension for Bend2 {
         Ok(configure_command(
             node,
             vec![
-                directory.join("server.mjs").to_string_lossy().into_owned(),
+                directory
+                    .join("launcher.mjs")
+                    .to_string_lossy()
+                    .into_owned(),
                 "--stdio".into(),
             ],
             settings.binary,
@@ -107,24 +103,6 @@ fn configure_command(
     result
 }
 
-fn require_node_22(version: &str) -> Result<()> {
-    let version = version.trim();
-    let major = version
-        .strip_prefix('v')
-        .unwrap_or(version)
-        .split('.')
-        .next()
-        .and_then(|major| major.parse::<u32>().ok());
-    match major {
-        Some(22..) => Ok(()),
-        _ => Err(format!(
-            "The bundled Bend2 language server requires Node.js 22 or newer; \
-             Zed's Node.js runtime reported {version:?}. Configure Zed to use \
-             Node.js 22+ or set lsp.bend2.binary.path to a custom language server."
-        )),
-    }
-}
-
 fn materialize(directory: &Path, assets: &[(&str, &[u8])]) -> Result<()> {
     fs::create_dir_all(directory)
         .map_err(|error| format!("Could not create {}: {error}", directory.display()))?;
@@ -150,26 +128,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn node_minimum_version() {
-        for version in ["v22.0.0\n", "24.1.0", "v23.0.0"] {
-            assert!(require_node_22(version).is_ok(), "{version}");
-        }
-        for version in ["v20.19.0", "v21.7.3", "", "not node"] {
-            assert!(require_node_22(version)
-                .unwrap_err()
-                .contains("22 or newer"));
-        }
-    }
-
-    #[test]
     fn command_defaults_and_explicit_overrides() {
         let command = configure_command(
             "/node".into(),
-            vec!["/extension/server.mjs".into(), "--stdio".into()],
+            vec!["/extension/launcher.mjs".into(), "--stdio".into()],
             None,
         );
         assert_eq!(command.command, "/node");
-        assert_eq!(command.args, ["/extension/server.mjs", "--stdio"]);
+        assert_eq!(command.args, ["/extension/launcher.mjs", "--stdio"]);
         assert!(command.env.is_empty());
 
         let settings = CommandSettings {

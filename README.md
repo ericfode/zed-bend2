@@ -78,6 +78,11 @@ the Bend2 server after rebuilding. If you previously installed the copied
 syntax-only extension at `~/.local/share/zed-bend2`, install this checkout as the
 dev extension instead; that older copy does not acquire new files automatically.
 
+Version **0.2.1** fixes the `process:exec ... ["--version"]` startup error in
+0.2.0. The Node version check now runs inside the language-server launcher,
+not as a separate extension process. No additional extension permissions or
+changes to `granted_extension_capabilities` are needed.
+
 ## Language features
 
 | Feature | Support |
